@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { raw, stringToToken, tokensToString, wrap } from "@dogehouse/kebab";
 import dotenv from "dotenv";
+import { speak } from "./commands/tts";
 import CompileCommands from "./CompileCommands";
 
 dotenv.config();
@@ -24,6 +25,9 @@ const main = async () => {
     );
 
     const commands = await CompileCommands();
+
+    const audio = speak();
+    console.log(audio);
 
     console.info(`commands: \n ${commands.map(command => " " + command.name)}`);
 

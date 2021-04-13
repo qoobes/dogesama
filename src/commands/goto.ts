@@ -13,7 +13,6 @@ const action = ({
     if (!parameters) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       instance.query.getTopPublicRooms().then((rooms: any) => {
-        console.log(rooms);
         if (!rooms.rooms[0]) return;
         instance.query.joinRoomAndGetInfo(rooms.rooms[0].id);
       });
