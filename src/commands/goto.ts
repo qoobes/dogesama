@@ -6,7 +6,6 @@ const action = ({
   instance,
   msg,
 }: CommandActionArguments): CommandActionReturnInterface => {
-  console.log(process.env.OWNER_USERNAME);
   if (msg.username !== process.env.OWNER_USERNAME)
     return { success: false, message: "Insufficient Permissions" };
 

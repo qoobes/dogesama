@@ -25,9 +25,7 @@ const main = async () => {
 
     const commands = await CompileCommands();
 
-    console.log(
-      `commands: \n ${commands.map((command) => " " + command.name)}`
-    );
+    console.info(`commands: \n ${commands.map(command => " " + command.name)}`);
 
     instance.subscribe.newChatMsg(async ({ userId, msg }) => {
       console.info(`=> ${msg.username} said ${tokensToString(msg.tokens)}`);
@@ -35,13 +33,10 @@ const main = async () => {
       const text = tokensToString(msg.tokens);
 
       if (userId === instance.connection.user.id) return;
-      console.log("iran");
 
       const [, command, parameters] = commandRegex.exec(text) ?? ["", ""];
 
-      const commandToRun = commands.find(
-        (comm) => comm && comm.name === command
-      );
+      const commandToRun = commands.find(comm => comm && comm.name === command);
       if (!commandToRun || !commandToRun.action) return;
 
       const result = commandToRun.action({ userId, parameters, instance, msg });
