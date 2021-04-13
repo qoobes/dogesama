@@ -35,11 +35,8 @@ const action = ({
   return { success: true, message: `${command.name}: ${command.description}` };
 };
 
-const name = "help";
-const description = "A list of avialable commands";
-
 export default {
   action,
-  name,
-  description,
+  name: "Help",
+  description: "A list of avialable commands",
 };
