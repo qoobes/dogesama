@@ -25,7 +25,9 @@ const main = async () => {
 
     const commands = await CompileCommands();
 
-    console.log(commands);
+    console.log(
+      `commands: \n ${commands.map((command) => " " + command.name)}`
+    );
 
     instance.subscribe.newChatMsg(async ({ userId, msg }) => {
       console.info(`=> ${msg.username} said ${tokensToString(msg.tokens)}`);
@@ -37,17 +39,19 @@ const main = async () => {
 
       const [, command, parameters] = commandRegex.exec(text) ?? ["", ""];
 
-      const commandToRun = commands.find((comm) => comm.name === command);
+      const commandToRun = commands.find(
+        (comm) => comm && comm.name === command
+      );
       if (!commandToRun || !commandToRun.action) return;
 
-      const result = commandToRun.action({ userId, parameters });
+      const result = commandToRun.action({ userId, parameters, instance, msg });
 
       await instance.mutation.sendRoomChatMsg(stringToToken(result.message));
     });
 
     console.info(`=> joining your default room`);
     await instance.query.joinRoomAndGetInfo(
-      "6008d038-abdf-4131-85e6-df616c2858da"
+      "3a3eb3f0-287a-410b-853c-5b0a10095b60"
     );
   } catch (e) {
     if (e.code === 4001) console.error("invalid token!");
