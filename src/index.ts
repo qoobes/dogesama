@@ -50,9 +50,7 @@ const main = async () => {
     });
 
     console.info(`=> joining your default room`);
-    await instance.query.joinRoomAndGetInfo(
-      "3a3eb3f0-287a-410b-853c-5b0a10095b60"
-    );
+    await instance.query.joinRoomAndGetInfo(process.env.DEFAULT_ROOM ?? "");
   } catch (e) {
     if (e.code === 4001) console.error("invalid token!");
     console.error(e);
