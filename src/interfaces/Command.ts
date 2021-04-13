@@ -1,3 +1,4 @@
+import CommandActionArguments from "./CommandActionArguments";
 import CommandActionReturnInterface from "./CommandActionReturnInterface";
 
 export default interface Command {
@@ -6,10 +7,9 @@ export default interface Command {
   action: ({
     userId,
     parameters,
-  }: {
-    userId: string;
-    parameters: string;
-  }) => CommandActionReturnInterface;
+    instance,
+    msg,
+  }: CommandActionArguments) => CommandActionReturnInterface;
 
   isOwnerOnly?: boolean;
 }
