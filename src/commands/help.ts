@@ -12,7 +12,8 @@ const action = ({
   const files = fs.readdirSync(__dirname);
 
   if (!files) return { success: true, message: "no commands" };
-  if (!parameters) {
+
+  if (!parameters || parameters.trim() === "") {
     const commands = files.map((file: string) => {
       if (!file.endsWith(".ts")) return;
 
@@ -21,7 +22,7 @@ const action = ({
     });
 
     const message = `My commands are: ${commands.map(
-      command => " " + command.name
+      command => command && " " + command.name
     )}`;
 
     return { success: true, message };
