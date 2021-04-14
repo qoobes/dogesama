@@ -37,6 +37,6 @@ const action = ({
 
 export default {
   action,
-  name: "Help",
+  name: "help",
   description: "A list of avialable commands",
 };
