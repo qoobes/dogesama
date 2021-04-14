@@ -29,7 +29,11 @@ const main = async () => {
     const audio = speak();
     console.log(audio);
 
-    console.info(`commands: \n ${commands.map(command => " " + command.name)}`);
+    console.info(
+      `commands: \n ${commands.map(command =>
+        command ? " " + command.name : null
+      )}`
+    );
 
     instance.subscribe.newChatMsg(async ({ userId, msg }) => {
       console.info(`=> ${msg.username} said ${tokensToString(msg.tokens)}`);
