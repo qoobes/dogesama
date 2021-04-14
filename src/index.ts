@@ -49,6 +49,8 @@ const main = async () => {
 
       const result = commandToRun.action({ userId, parameters, instance, msg });
 
+      console.info(`=> ${msg.username} used /${command}`);
+
       await instance.mutation.sendRoomChatMsg(stringToToken(result.message));
     });
 
